@@ -1,0 +1,38 @@
+--Here I created a databse for a shoe store--
+
+CREATE TABLE Ants_Shoes (brand TEXT, name TEXT, size INTEGER, quantity INTEGER, price INTEGER);
+INSERT INTO Ants_shoes VALUES ("Nike", "Air Force Max", 10, 5, 100);
+INSERT INTO Ants_shoes VALUES ("Converse", "All Star", 12, 3, 75);
+INSERT INTO Ants_shoes VALUES ("Puma", "Tazan Advanced", 14, 6, 120);
+INSERT INTO Ants_shoes VALUES ("Nike", "Air Force 1", 11.5, 4, 95);
+INSERT INTO Ants_shoes VALUES ("Adidas", "Superstar", 13, 8, 85);
+INSERT INTO Ants_shoes VALUES ("Nike", "Tanjun", 8, 12, 65);
+INSERT INTO Ants_shoes VALUES ("Puma", "Fenty", 7, 9, 120);
+INSERT INTO Ants_shoes VALUES ("New Balance", "Casual 574", 9.5, 4, 70);
+INSERT INTO Ants_shoes VALUES ("Steve Madden", "Uptopia Heels", 6.5, 5, 175);
+INSERT INTO Ants_shoes VALUES ("Steve Madden", "Irene Heel", 7.5, 9, 250);
+INSERT INTO Ants_shoes VALUES ("Nike", "Air Jordan", 13, 6, 125);
+INSERT INTO Ants_shoes VALUES ("Lulus", "Black Suede", 8, 7, 180);
+INSERT INTO Ants_shoes VALUES ("Dr. Marten", "Jadon", 11, 3, 140);
+INSERT INTO Ants_shoes VALUES ("Dr. Marten", "Embury Chelsea Boots", 12, 8, 145);
+INSERT INTO Ants_shoes VALUES ("Adidas", "Forum Low", 10, 3, 98);
+
+--ordering by highest price to lowest price--
+
+SELECT * FROM Ants_shoes ORDER BY price DESC;
+
+--ordering brand name alphabetically--
+
+SELECT * FROM Ants_shoes ORDER BY brand ASC;
+
+--ordering by only Nike--
+
+SELECT * FROM Ants_shoes WHERE brand = 'Nike';
+
+-- ordering by prices less than 100 --
+
+SELECT * FROM Ants_shoes WHERE price <100;
+
+-- ordering by quantity less than 5 --
+
+SELECT * FROM Ants_shoes WHERE quantity <5;
