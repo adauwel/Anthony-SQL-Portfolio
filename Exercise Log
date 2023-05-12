@@ -1,0 +1,48 @@
+--In this query, I am logging exercise--
+CREATE TABLE exercise_logs
+    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT,
+    minutes INTEGER, 
+    calories INTEGER);
+
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("walking", 60, 200);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("walking", 45, 150);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("biking", 30, 205);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("biking", 60, 350);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("jogging", 30, 225);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("jogging", 45, 290);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("hiking", 90, 210);
+INSERT INTO exercise_logs(type, minutes, calories) VALUES ("hiking", 30, 130);
+
+--Which activities burned more than 200 calories?--
+
+SELECT * FROM exercise_logs WHERE calories > 200 ORDER BY calories;
+
+--Which activities burned more than 200 calories but took less than 60 minutes? --
+
+SELECT * FROM exercise_logs WHERE calories > 50 AND minutes < 60;
+
+--Display only the walking and jogging activities, order by calories burned from most to least--
+
+SELECT walking, jogging FROM exercise_logs ORDER BY calories DESC;
+
+--Create new table of favorite exercises and their reasons--
+
+CREATE TABLE favorite_exercises
+  (id INTEGER PRIMARY KEY,
+  type TEXT, 
+  reason TEXT);
+
+INSERT INTO favorite_exercises(type, reason) VALUES ("biking", "Strengthens heart muscle and reduces blood fat levels.");
+INSERT INTO favorite exercises(type, reason) VALUES ("hiking", "Improves cardiovascular health and reduces stress levels.");
+
+--*IN clause* Show all exercise logs that correspond to favorite exercises--
+
+SELECT type FROM favorite_exercises;
+SELECT * FROM exercise_logs WHERE type IN (SELECT type FROM favorite_exercises);
+
+--*HAVING clause* Display all the exercises where more than 210 calories were burned, across all of the logs--
+
+SELECT type, SUM(calories) AS total_colories FROM exercise_logs
+  GROUP BY type
+  HAVING total_calories > 210;
