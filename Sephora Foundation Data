@@ -1,0 +1,62 @@
+Here is a table I created with Sephora's best selling foundations with the name, brand, brand, price, rating, and number of reviews. I used this to answer some questions.
+
+CREATE TABLE foundations (
+  foundation_name VARCHAR(100),
+  brand VARCHAR(50),
+  price DECIMAL(8, 2),
+  rating DECIMAL(3, 1),
+  num_reviews INT
+);
+INSERT INTO foundations (foundation_name, brand, price, rating, num_reviews)
+VALUES 
+  ('Dior Backstage Face & Body Foundation', 'Dior', 40.0, 4.7, 1023),
+  ('Estée Lauder Double Wear Stay-in-Place Foundation', 'Estée Lauder', 42.0, 4.8, 1567),
+  ('Fenty Beauty Pro Filt''r Soft Matte Longwear Foundation', 'Fenty Beauty', 35.0, 4.5, 2389),
+  ('Make Up For Ever Ultra HD Invisible Cover Foundation', 'Make Up For Ever', 43.0, 4.6, 893),
+  ('Giorgio Armani Luminous Silk Foundation', 'Giorgio Armani', 64.0, 4.9, 745),
+  ('Tarte Amazonian Clay 12-Hour Full Coverage Foundation', 'Tarte', 39.0, 4.7, 1121),
+  ('Too Faced Born This Way Foundation', 'Too Faced', 39.0, 4.6, 1743),
+  ('NARS Natural Radiant Longwear Foundation', 'NARS', 49.0, 4.8, 932),
+  ('Hourglass Vanish Seamless Finish Foundation Stick', 'Hourglass', 46.0, 4.6, 521),
+  ('Urban Decay All Nighter Liquid Foundation', 'Urban Decay', 40.0, 4.5, 1087);
+  
+  --What is the average rating of the foundations at Sephora?--
+  
+  SELECT AVG(rating) AS average_rating
+  FROM foundations;
+  
+  --How many foundations have a price higher than $40?--
+  
+  SELECT COUNT(*) AS foundation_count
+  FROM founadtions
+  WHERE price > 40;
+  
+  --What are the top 3 most expensive foundations>--
+  
+  SELECT foundation_name, brnad, price
+  FROM foundations
+  ORDER BY price DESC LIMIT 3;
+  
+  --What is the average rating of foundations priced higher than $50 and have more than 1000 reviews?--
+  
+  SELECT AVG(rating) AS average_rating
+  FROM foundations
+  WHERE price > 50.0 AND num_reviews > 1000;
+  
+  --How many foundations have a rating higher than the lowest rating among foundations priced between $40 and $60?--
+  
+  SELECT COUNT(*) AS foundation_count
+  FROM foundations
+  WHERE rating > (
+    SELECT MIN(rating)
+    FROM foundations
+    WHERE price >= 40.0 AND price <= 60.0;
+    
+  -- Which brand has the largest price range between its lowest-priced and highest-priced foundation? --
+  
+  SELECT brand, MAX(price) - MIN(price) AS price_range
+  FROM foundations
+  GROUP BY brand
+  ORDER BY price_range DESC
+  LIMIT 1;
+    
