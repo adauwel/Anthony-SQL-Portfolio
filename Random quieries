@@ -1,0 +1,51 @@
+--These are hypothetical queries based on a random datat set to answer a few questions--
+
+--What is the total sales amount?--
+SELECT SUM(sales) AS total_sales
+FROM Sales;
+
+-- Find the average rating of products--
+SELECT AVG(rating) AS average_rating
+FROM ProductReviews;
+
+-- Counting the number of orders per customer--
+SELECT customer_id, COUNT(*) AS order_count
+FROM Orders
+GROUP BY customer_id;
+
+-- Find customers who have placed orders with a total value above the average order value--
+SELECT customer_id, first_name, last_name
+FROM Customers
+WHERE customer_id IN (
+    SELECT customer_id
+    FROM Orders
+    GROUP BY customer_id
+    HAVING SUM(total_value) > (
+        SELECT AVG(total_value)
+        FROM Orders
+    )
+);
+
+-- Filter orders by date range for the year of 2022--
+SELECT *
+FROM Orders
+WHERE order_date BETWEEN '2022-01-01' AND '2022-12-31';
+
+-- Retrieve the top 3 customers with the highest total order values--
+SELECT c.customer_id, c.first_name, c.last_name, SUM(o.total_value) AS total_order_value
+FROM Customers c
+JOIN Orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name
+ORDER BY total_order_value DESC
+LIMIT 3;
+
+
+-- Update products in the 'Clearance' category with 50% off--
+UPDATE Products
+SET price = price * 0.5
+WHERE category = 'Clearance';
+
+-- Update order status to 'Shipped' for orders with value above $500--
+UPDATE Orders
+SET status = 'Shipped'
+WHERE total_value > 500;
